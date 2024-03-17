@@ -6,6 +6,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from dependency import lifespan
+from router.user import user_router
 from router.auth import auth_router
 from router.recipe import recipe_router
 from router.bookmark import bookmark_router
@@ -29,6 +30,7 @@ async def add_auth_middleware(request: Request, call_next):
 
 
 app.include_router(auth_router, prefix="/auth")
+app.include_router(user_router, prefix="/user")
 app.include_router(recipe_router, prefix="/recipe")
 app.include_router(bookmark_router, prefix="/bookmark")
 

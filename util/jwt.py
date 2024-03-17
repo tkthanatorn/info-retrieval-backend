@@ -15,10 +15,10 @@ def create_jwt(sub: str) -> str:
 
 
 # Verify a JWT
-def verify_jwt(token) -> bool:
+def verify_jwt(token) -> tuple[bool, str]:
     try:
-        jwt.decode(token, os.getenv("JWT_SECRET"), algorithms=["HS256"])
-        return True
+        claim = jwt.decode(token, os.getenv("JWT_SECRET"), algorithms=["HS256"])
+        return True, claim["sub"]
     except JWTError as e:
         logger.error(f"🚨 Invalid token: {e}")
-        return False
+        return False, ""

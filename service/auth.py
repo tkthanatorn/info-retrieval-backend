@@ -13,3 +13,8 @@ async def login(username: str, password: str) -> str:
         raise ValueError("Invalid password")
 
     return user["id"], jwt.create_jwt(username)
+
+
+async def get_user(username: str) -> dict:
+    data = Registry().user_repo.find_by_username(username)
+    return dict(id=data["id"], username=data["username"])

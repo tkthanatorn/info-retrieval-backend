@@ -12,7 +12,9 @@ async def authorize_middleware(req: Request, call_next):
     if len(parts) != 2:
         return response(401, None, "Unauthorized")
 
-    if not jwt.verify_jwt(parts[1]):
+    ok, user_id = jwt.verify_jwt(parts[1])
+    if not ok:
         return response(401, None, "Unauthorized")
 
+    req.state.user_id = user_id
     return await call_next(req)
