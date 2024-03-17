@@ -32,6 +32,7 @@ def delete(body: DeleteBookmarkBody):
         bookmark.delete(body.user_id, body.recipe_id)
         return response(200, None, None)
     except Exception as e:
+        print(e)
         return response(400, None, e)
 
 

@@ -52,6 +52,6 @@ class BookmarkRepo(IBookmarkRepo):
 
     def delete(self, user_id: str, recipe_id: int):
         db = get_database()
-        sql = "DELETE FROM tbl_bookmarks WHERE user_id = %s AND recipe_id = %d"
+        sql = "DELETE FROM tbl_bookmarks WHERE user_id = %s AND recipe_id = %s"
         db.cursor().execute(sql, (user_id, recipe_id))
         db.commit()
