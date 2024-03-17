@@ -27,16 +27,16 @@ async def search_recipe_by_name(query: str):
 
 
 @recipe_router.get("/by-instruction")
-async def search_recipe_by_name(query: str):
+async def search_recipe_by_instruction(query: str):
     try:
         data = await recipe.search_recipe_by_instruction(query)
-        return dict(result=data)
+        return response(200, data, None)
     except Exception as e:
         return response(400, None, e)
 
 
 @recipe_router.get("/by-ingredient")
-async def search_recipe_by_name(query: str):
+async def search_recipe_by_ingredient(query: str):
     try:
         data = await recipe.search_recipe_by_ingredient(query)
         return response(200, data, None)

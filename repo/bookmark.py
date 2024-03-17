@@ -30,7 +30,7 @@ class BookmarkRepo(IBookmarkRepo):
         rating: int,
     ) -> None:
         db = get_database()
-        sql = "INSERT INTO tbl_bookmarks (id, user_id, recipe_id, rating) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO tbl_bookmarks (id, user_id, recipe_id, rating) VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE user_id = VALUES(user_id), recipe_id = VALUES(recipe_id), rating = VALUES(rating)"
         db.cursor().execute(sql, (shortuuid.uuid(), user_id, recipe_id, rating))
         db.commit()
 
