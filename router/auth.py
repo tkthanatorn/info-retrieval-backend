@@ -30,8 +30,8 @@ async def register(body: RegisterBody, res: Response):
 @auth_router.post("/login", status_code=200)
 async def login(body: LoginBody, res: Response):
     try:
-        token = await auth.login(body.username, body.password)
-        result = dict(token=token)
+        user_id, token = await auth.login(body.username, body.password)
+        result = dict(user_id=user_id, token=token)
         return response(200, result, None)
     except Exception as e:
         return response(400, None, e)
