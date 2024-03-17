@@ -26,7 +26,7 @@ def save(body: SaveBookmarkBody):
         return response(400, None, e)
 
 
-@bookmark_router.delete("")
+@bookmark_router.patch("")
 def delete(body: DeleteBookmarkBody):
     try:
         bookmark.delete(body.user_id, body.recipe_id)
